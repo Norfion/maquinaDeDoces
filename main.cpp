@@ -172,7 +172,7 @@ void modoADM_alterar_excluir(struct item p_1[], int *p_2) {
 
   while (true) {
     cout << "Insira o código do produto (ou 0 para cancelar): ";
-    if (!(cin >> selecionado) || selecionado <= 0 || selecionado > *p_2) {
+    if (!(cin >> selecionado) || selecionado < 0 || selecionado > *p_2) {
       cout << endl;
       cout << "Insira um código válido!" << endl;
       cout << endl;
@@ -201,6 +201,7 @@ void modoADM_alterar_excluir(struct item p_1[], int *p_2) {
           cin.clear();
           cin.ignore(tudo);
           sleep(delay);
+          break;
         } else {
           cin.clear();
           cin.ignore(tudo);
