@@ -80,8 +80,8 @@ void modoADM_alterar_nome(struct item p_1[], int p_2) {
   int selecionado;
 
   while (true) {
-    cout << "Insira o código do produto: ";
-    if (!(cin >> selecionado) || selecionado <= 0 || selecionado > p_2) {
+    cout << "Insira o código do produto (ou 0 para cancelar): ";
+    if (!(cin >> selecionado) || selecionado < 0 || selecionado > p_2) {
       cout << endl;
       cout << "Insira um código válido!" << endl;
       cout << endl;
@@ -89,12 +89,18 @@ void modoADM_alterar_nome(struct item p_1[], int p_2) {
       cin.clear();
       cin.ignore(tudo);
     } else {
-      cout << p_1[selecionado - 1].nome << " será alterado para: ";
-      cin >> p_1[selecionado - 1].nome;
-      cout << endl;
-      cout << "Alteração realizada com sucesso!" << endl;
-      sleep(delay);
-      break;
+      if (selecionado == 0) {
+        cin.clear();
+        cin.ignore(tudo);
+        break;
+      } else {
+        cout << p_1[selecionado - 1].nome << " será alterado para: ";
+        cin >> p_1[selecionado - 1].nome;
+        cout << endl;
+        cout << "Alteração realizada com sucesso!" << endl;
+        sleep(delay);
+        break;
+      }
     }
   }
 }
@@ -102,8 +108,8 @@ void modoADM_alterar_preco(struct item p_1[], int p_2) {
   int selecionado;
 
   while (true) {
-    cout << "Insira o código do produto: ";
-    if (!(cin >> selecionado) || selecionado <= 0 || selecionado > p_2) {
+    cout << "Insira o código do produto (ou 0 para cancelar): ";
+    if (!(cin >> selecionado) || selecionado < 0 || selecionado > p_2) {
       cout << endl;
       cout << "Insira um código válido!" << endl;
       cout << endl;
@@ -111,24 +117,30 @@ void modoADM_alterar_preco(struct item p_1[], int p_2) {
       cin.clear();
       cin.ignore(tudo);
     } else {
-      while (true) {
-        cout << p_1[selecionado - 1].nome << " R$" << p_1[selecionado - 1].preco
-             << " será alterado para: ";
-        if (!(cin >> p_1[selecionado - 1].preco) ||
-            p_1[selecionado - 1].preco <= 0) {
-          cout << endl;
-          cout << "Insira um preço válido!" << endl;
-          cout << endl;
-          sleep(delay);
-          cin.clear();
-          cin.ignore(tudo);
-        } else {
-          cout << "Alteração realizada com sucesso!" << endl;
-          sleep(delay);
-          break;
+      if (selecionado == 0) {
+        cin.clear();
+        cin.ignore(tudo);
+        break;
+      } else {
+        while (true) {
+          cout << p_1[selecionado - 1].nome << " R$"
+               << p_1[selecionado - 1].preco << " será alterado para: ";
+          if (!(cin >> p_1[selecionado - 1].preco) ||
+              p_1[selecionado - 1].preco <= 0) {
+            cout << endl;
+            cout << "Insira um preço válido!" << endl;
+            cout << endl;
+            sleep(delay);
+            cin.clear();
+            cin.ignore(tudo);
+          } else {
+            cout << "Alteração realizada com sucesso!" << endl;
+            sleep(delay);
+            break;
+          }
         }
+        break;
       }
-      break;
     }
   }
 }
@@ -136,8 +148,8 @@ void modoADM_alterar_quantidade(struct item p_1[], int p_2) {
   int selecionado;
 
   while (true) {
-    cout << "Insira o código do produto: ";
-    if (!(cin >> selecionado) || selecionado <= 0 || selecionado > p_2) {
+    cout << "Insira o código do produto (ou 0 para cancelar): ";
+    if (!(cin >> selecionado) || selecionado < 0 || selecionado > p_2) {
       cout << endl;
       cout << "Insira um código válido!" << endl;
       cout << endl;
@@ -145,24 +157,30 @@ void modoADM_alterar_quantidade(struct item p_1[], int p_2) {
       cin.clear();
       cin.ignore(tudo);
     } else {
-      while (true) {
-        cout << p_1[selecionado - 1].quantidade << "un de "
-             << p_1[selecionado - 1].nome << " será alterado para: ";
-        if (!(cin >> p_1[selecionado - 1].quantidade) ||
-            p_1[selecionado - 1].quantidade < 0) {
-          cout << endl;
-          cout << "Insira uma quantidade válida!" << endl;
-          cout << endl;
-          sleep(delay);
-          cin.clear();
-          cin.ignore(tudo);
-        } else {
-          cout << "Alteração realizada com sucesso!" << endl;
-          sleep(delay);
-          break;
+      if (selecionado == 0) {
+        cin.clear();
+        cin.ignore(tudo);
+        break;
+      } else {
+        while (true) {
+          cout << p_1[selecionado - 1].quantidade << "un de "
+               << p_1[selecionado - 1].nome << " será alterado para: ";
+          if (!(cin >> p_1[selecionado - 1].quantidade) ||
+              p_1[selecionado - 1].quantidade < 0) {
+            cout << endl;
+            cout << "Insira uma quantidade válida!" << endl;
+            cout << endl;
+            sleep(delay);
+            cin.clear();
+            cin.ignore(tudo);
+          } else {
+            cout << "Alteração realizada com sucesso!" << endl;
+            sleep(delay);
+            break;
+          }
         }
+        break;
       }
-      break;
     }
   }
 }
