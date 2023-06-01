@@ -326,9 +326,10 @@ void modoADM_trocarSenha(int *p_1) {
   cout << "Chave de acesso atual: " << *p_1 << endl;
   cout << endl;
 
+  int selecionado;
   while (true) {
-    cout << "Insira a nova chave: ";
-    if (!(cin >> *p_1)) {
+    cout << "Insira a nova chave (ou 0 para cancelar): ";
+    if (!(cin >> selecionado) || selecionado < 0) {
       system("clear");
       cout << "Insira uma chave válida!\n\nOBS: A chave precisa ser um número "
               "inteiro maior que 0"
@@ -339,25 +340,17 @@ void modoADM_trocarSenha(int *p_1) {
       cin.ignore(tudo);
       system("clear");
     } else {
-      if (*p_1 <= 0) {
-        system("clear");
-        cout << "Insira uma chave válida!\n\nOBS: A chave precisa ser um "
-                "número "
-                "inteiro maior que 0"
-             << endl;
-        cout << endl;
-        sleep(delay);
-        cin.clear();
-        cin.ignore(tudo);
-        system("clear");
-      } else {
+      if (selecionado == 0) {
         break;
+      } else {
+        cout << selecionado << " cadastrada com sucesso como nova chave!"
+             << endl;
+        *p_1 = selecionado;
+        sleep(delay);
+        system("clear");
       }
     }
   }
-  cout << *p_1 << " cadastrada com sucesso como nova chave!" << endl;
-  sleep(delay);
-  system("clear");
 }
 void modoADM(struct item p_1[], int *p_2, float p_3) {
   int inserido;
