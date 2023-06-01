@@ -146,8 +146,8 @@ void modoADM_alterar_quantidade(struct item p_1[], int p_2) {
       cin.ignore(tudo);
     } else {
       while (true) {
-        cout << p_1[selecionado - 1].quantidade << "un de " << p_1[selecionado - 1].nome
-             << " será alterado para: ";
+        cout << p_1[selecionado - 1].quantidade << "un de "
+             << p_1[selecionado - 1].nome << " será alterado para: ";
         if (!(cin >> p_1[selecionado - 1].quantidade) ||
             p_1[selecionado - 1].quantidade < 0) {
           cout << endl;
@@ -166,14 +166,49 @@ void modoADM_alterar_quantidade(struct item p_1[], int p_2) {
     }
   }
 }
-void modoADM_alterar_excluir(struct item p_1[], int *p_2, int p_3) {
-  for (int i = p_3 - 1; i < *p_2; i++) {
-    p_1[i].nome = p_1[i + 1].nome;
-    p_1[i].preco = p_1[i + 1].preco;
-    p_1[i].quantidade = p_1[i + 1].quantidade;
-    p_1[i].quantidade = p_1[i + 1].codigo;
+void modoADM_alterar_excluir(struct item p_1[], int *p_2) {
+  int selecionado;
+  int selecionado_2;
+
+  while (true) {
+    cout << "Insira o código do produto (ou 0 para cancelar): ";
+    if (!(cin >> selecionado) || selecionado <= 0 || selecionado > *p_2) {
+      cout << endl;
+      cout << "Insira um código válido!" << endl;
+      cout << endl;
+      cin.clear();
+      cin.ignore(tudo);
+    } else {
+      if (selecionado == 0) {
+        break;
+      } else {
+        cout << "Confirmar exclusão de: " << p_1[selecionado - 1].nome
+             << "? \n1 - Sim\nOutra tecla - Não\n\nOpção: ";
+        cin >> selecionado_2;
+
+        if (selecionado_2 == 1) {
+
+          for (int i = selecionado - 1; i < *p_2; i++) {
+            p_1[i].nome = p_1[i + 1].nome;
+            p_1[i].preco = p_1[i + 1].preco;
+            p_1[i].quantidade = p_1[i + 1].quantidade;
+            p_1[i].quantidade = p_1[i + 1].codigo;
+          }
+          (*p_2)--;
+
+          cout << endl;
+          cout << "Produto excluido com sucesso!" << endl;
+          cin.clear();
+          cin.ignore(tudo);
+          sleep(delay);
+        } else {
+          cin.clear();
+          cin.ignore(tudo);
+          break;
+        }
+      }
+    }
   }
-  (*p_2)--;
 }
 void modoADM_cadastrar(struct item p_1[], int *p_2) {
   cout << "----CADASTRO DE PRODUTOS----" << endl;
@@ -247,37 +282,14 @@ void modoADM_alterar(struct item p_1[], int *p_2) {
       int selecionado_2;
 
       while (true) {
-        cout << "Insira o código do produto: ";
-        if (!(cin >> selecionado) || p_1[selecionado - 1].quantidade < 0) {
-          cout << endl;
-          cout << "Insira um código válido!" << endl;
-          cout << endl;
-          cin.clear();
-          cin.ignore(tudo);
-        } else {
-          break;
-        }
-      }
-
-      cout << "Confirmar exclusão de: " << p_1[selecionado - 1].nome
-           << "? \n1 - Sim\nOutra tecla - Não\n\nOpção: ";
-      cin >> selecionado_2;
-
-      if (selecionado_2 == 1) {
-        modoADM_alterar_excluir(p_1, p_2, selecionado);
-        cout << endl;
-        cout << "Produto excluido com sucesso!" << endl;
+        modoADM_alterar_excluir(p_1, p_2);
+        break;
+      default:
         sleep(delay);
+        cin.clear();
+        cin.ignore(tudo);
+        return;
       }
-
-      cin.clear();
-      cin.ignore(tudo);
-      break;
-    default:
-      sleep(delay);
-      cin.clear();
-      cin.ignore(tudo);
-      return;
     }
   }
 }
@@ -310,10 +322,10 @@ void modoADM_trocarSenha(int *p_1) {
     } else {
       if (*p_1 <= 0) {
         system("clear");
-        cout
-            << "Insira uma chave válida!\n\nOBS: A chave precisa ser um número "
-               "inteiro maior que 0"
-            << endl;
+        cout << "Insira uma chave válida!\n\nOBS: A chave precisa ser um "
+                "número "
+                "inteiro maior que 0"
+             << endl;
         cout << endl;
         sleep(delay);
         cin.clear();
