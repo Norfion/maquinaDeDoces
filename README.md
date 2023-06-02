@@ -1,23 +1,45 @@
 # Máquina de Doces
 
+Este é um programa em C++ para uma Vendin Macihine que permite gerenciar produtos em uma base de dados. Ele permite cadastrar, exibir e realizar alterações nos produtos.
 
-
-
-Esse programa visa simular uma Vending Machine com C++. Não são necessárias a instalação de bibliotecas externas.
+## Funcionalidades
 
 O programa possui dois modos:
-- Aadministrador
 - Usuário
+- Administrador
 
-Ao iniciar o programa, há uma tela inicial que pede para inserir alguma tecla. Essa tela serve como cortina de fumaça para poder entrar no modo administrador. Basta inserir a chave de acesso correta, quais outras combinações de caracteres levarão para o modo usuário.
+No modo usuário, é exibida uma tela em loop com os produtos e pode-se comprar um produto
 
-### Modo Administrador:
-Neste modo, você pode cadastrar novos produtos no sistema, bem como modificar as propriedades dos produtos já cadastrados (nome e quantidade na máquina). 
-Além disso, é possível checar quanto há no cofre da máquina. E quanto ela ainda pode render - a soma dos valores dos itens disponíveis na máquina, supondo que todos sejam vendidos.
+Já no modo Administrador, programa possui as seguintes funcionalidades:
 
-### Modo Usuário:
-Neste modo, você pode consultar os produtos disponíveis e comprá-los. O código registra a compra, atualiza as quantidades disponíveis e devolve troco, caso precise.
+1. Cadastrar produtos com nome, preço e quantidade.
+2. Exibir a lista de produtos cadastrados.
+3. Alterar o nome, preço ou quantidade de um produto existente.
+4. Remover um produto da base de dados.
 
+## Como usar
+
+1. Faça o download dos arquivos fonte do programa.
+2. Compile o programa em um ambiente de desenvolvimento C++.
+3. Execute o programa.
+
+Ao executar o programa, para entrar no Modo Administrador, insira *1212* (uma *chave de acesso* pré-configurada)
+
+Ou
+
+Selecione a opção desejada digitando o número correspondente e siga as instruções exibidas na tela.
+
+## Limitações
+
+- O programa possui uma capacidade máxima de 50 produtos na base de dados.
+- O nome dos produtos não pode conter acentos ou caracteres especiais, pois isso interfere na formatação de exibição dos produtos (o menu fica "torto").
+- As modificações são voláteis. Ou seja, caso o programa seja reiniciado ou deixe de ser executado, as alterações feitas, como mudança na chave de acesso, um novo produto cadastrado, alteração de preço etc não ficam salvas e são perdidas quando o programa é encerrado.
+
+## Contribuições
+
+Contribuições para melhorias e correções no programa são bem-vindas. Se você encontrar algum problema ou tiver uma ideia de melhoria, sinta-se à vontade para abrir uma issue ou enviar um pull request.
+
+## Autor
 
 > **Aluno:** Normando Nascimento O. Meira
 
