@@ -1,5 +1,7 @@
+#include <iomanip>
 #include <iostream>
 #include <limits>
+#include <string>
 #include <unistd.h>
 
 using namespace std;
@@ -20,6 +22,20 @@ struct item {
   int codigo;
 };
 
+int exibir_maiorNome(struct item p_1[], int p_2){
+  int maior;
+  for(int i = 0; i < p_2; i++){
+    if(i == 0){
+      maior = p_1[i].nome.length();
+    } else {
+      if(p_1[i].nome.length() > maior){
+        maior = p_1[i].nome.length();
+      }
+    }
+  }
+  return maior;
+}
+
 void pausa() {
   string pausa;
   cout << "Digite algo para continuar...";
@@ -28,28 +44,41 @@ void pausa() {
 void exibir(struct item p_1[], int p_2, int p_3) {
   switch (p_3) {
   case 1:
-    cout << "Cód | Prod | Preço | Qtd" << endl;
+    cout << left << setw(3) << "Cód"
+         << " | " << left << setw(exibir_maiorNome(p_1, p_2)) << "Produto"
+         << " | " << left << setw(5) << "Preço" << endl;
+
     for (int i = 0; i < p_2; i++) {
       if (p_1[i].quantidade > 0) {
-        cout << p_1[i].codigo << " | " << p_1[i].nome << "  | R$"
-             << p_1[i].preco << " | " << p_1[i].quantidade << "un" << endl;
+        cout << left << setw(3) << p_1[i].codigo << " | " << left << setw(exibir_maiorNome(p_1, p_2))
+             << p_1[i].nome << " | " << left << setw(2) << "R$" << fixed
+             << setprecision(2) << p_1[i].preco << " | " << endl;
       }
     }
     break;
   case 2:
-    cout << "Cód | Prod | Preço" << endl;
+    cout << left << setw(3) << "Cód"
+         << " | " << left << setw(exibir_maiorNome(p_1, p_2)) << "Produto"
+         << " | " << left << setw(5) << "Preço"
+         << " | " << right << setw(2) << "Qtd" << endl;
+
     for (int i = 0; i < p_2; i++) {
       if (p_1[i].quantidade > 0) {
-        cout << p_1[i].codigo << " | " << p_1[i].nome << "  | R$"
-             << p_1[i].preco << endl;
+        cout << left << setw(3) << p_1[i].codigo << " | " << left << setw(exibir_maiorNome(p_1, p_2))
+             << p_1[i].nome << " | " << left << setw(2) << "R$" << fixed
+             << setprecision(2) << p_1[i].preco << " | " << left << setw(2)
+             << p_1[i].quantidade << "un" << endl;
       }
     }
     break;
   case 3:
-    cout << "Cód | Prod" << endl;
+        cout << left << setw(3) << "Cód"
+         << " | " << left << setw(exibir_maiorNome(p_1, p_2)) << "Produto" << endl;
+
     for (int i = 0; i < p_2; i++) {
       if (p_1[i].quantidade > 0) {
-        cout << p_1[i].codigo << " | " << p_1[i].nome << endl;
+        cout << left << setw(3) << p_1[i].codigo << " | " << left << setw(exibir_maiorNome(p_1, p_2))
+             << p_1[i].nome << endl;
       }
     }
     break;
