@@ -33,7 +33,7 @@ Selecione a opção desejada digitando o número correspondente e siga as instru
 
 - O programa possui uma capacidade máxima de 50 produtos na base de dados.
 - O nome dos produtos não pode conter acentos ou caracteres especiais, pois isso interfere na formatação de exibição dos produtos (o menu fica "torto").
-- As modificações são voláteis. Ou seja, caso o programa seja reiniciado ou deixe de ser executado, as alterações feitas, como mudança na chave de acesso, um novo produto cadastrado, alteração de preço etc não ficam salvas e são perdidas quando o programa é encerrado.
+- As modificações são voláteis. Ou seja, caso o programa seja encerrado ou reiniciado, as alterações feitas, como mudança na chave de acesso, um novo produto cadastrado, alteração de preço etc são perdidas.
 
 ## Contribuições
 
