@@ -4,6 +4,7 @@
 #include <string>
 #include <unistd.h>
 
+
 using namespace std;
 // Define a capacidade máxima de p_1 a serem cadastrados
 const int qtdMaxDeProdutos = 51;
@@ -45,12 +46,12 @@ void exibir(struct item p_1[], int p_2, int p_3) {
   switch (p_3) {
   case 1:
     cout << left << setw(3) << "Cód"
-         << " | " << left << setw(exibir_maiorNome(p_1, p_2)) << "Produto"
+         << " | " << left << setw(exibir_maiorNome(p_1, p_2) + 2) << "Produto"
          << " | " << left << setw(5) << "Preço" << endl;
 
     for (int i = 0; i < p_2; i++) {
       if (p_1[i].quantidade > 0) {
-        cout << left << setw(3) << p_1[i].codigo << " | " << left << setw(exibir_maiorNome(p_1, p_2))
+        cout << left << setw(3) << p_1[i].codigo << " | " << left << setw(exibir_maiorNome(p_1, p_2) + 2)
              << p_1[i].nome << " | " << left << setw(2) << "R$" << fixed
              << setprecision(2) << p_1[i].preco << " | " << endl;
       }
@@ -58,13 +59,13 @@ void exibir(struct item p_1[], int p_2, int p_3) {
     break;
   case 2:
     cout << left << setw(3) << "Cód"
-         << " | " << left << setw(exibir_maiorNome(p_1, p_2)) << "Produto"
+         << " | " << left << setw(exibir_maiorNome(p_1, p_2) + 2) << "Produto"
          << " | " << left << setw(5) << "Preço"
          << " | " << right << setw(2) << "Qtd" << endl;
 
     for (int i = 0; i < p_2; i++) {
       if (p_1[i].quantidade > 0) {
-        cout << left << setw(3) << p_1[i].codigo << " | " << left << setw(exibir_maiorNome(p_1, p_2))
+        cout << left << setw(3) << p_1[i].codigo << " | " << left << setw(exibir_maiorNome(p_1, p_2) + 2)
              << p_1[i].nome << " | " << left << setw(2) << "R$" << fixed
              << setprecision(2) << p_1[i].preco << " | " << left << setw(2)
              << p_1[i].quantidade << "un" << endl;
@@ -73,11 +74,11 @@ void exibir(struct item p_1[], int p_2, int p_3) {
     break;
   case 3:
         cout << left << setw(3) << "Cód"
-         << " | " << left << setw(exibir_maiorNome(p_1, p_2)) << "Produto" << endl;
+         << " | " << left << setw(exibir_maiorNome(p_1, p_2) + 2) << "Produto" << endl;
 
     for (int i = 0; i < p_2; i++) {
       if (p_1[i].quantidade > 0) {
-        cout << left << setw(3) << p_1[i].codigo << " | " << left << setw(exibir_maiorNome(p_1, p_2))
+        cout << left << setw(3) << p_1[i].codigo << " | " << left << setw(exibir_maiorNome(p_1, p_2) + 2)
              << p_1[i].nome << endl;
       }
     }
