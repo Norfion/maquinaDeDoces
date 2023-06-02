@@ -23,77 +23,17 @@ struct item {
   int codigo;
 };
 
-int exibir_maiorNome(struct item p_1[], int p_2){
-  int maior;
-  for(int i = 0; i < p_2; i++){
-    if(i == 0){
-      maior = p_1[i].nome.length();
-    } else {
-      if(p_1[i].nome.length() > maior){
-        maior = p_1[i].nome.length();
-      }
-    }
-  }
-  return maior;
-}
-
 void pausa() {
   string pausa;
   cout << "Digite algo para continuar...";
   cin >> pausa;
-}
-void exibir(struct item p_1[], int p_2, int p_3) {
-  switch (p_3) {
-  case 1:
-    cout << left << setw(3) << "Cód"
-         << " | " << left << setw(exibir_maiorNome(p_1, p_2) + 2) << "Produto"
-         << " | " << left << setw(5) << "Preço" << endl;
-
-    for (int i = 0; i < p_2; i++) {
-      if (p_1[i].quantidade > 0) {
-        cout << left << setw(3) << p_1[i].codigo << " | " << left << setw(exibir_maiorNome(p_1, p_2) + 2)
-             << p_1[i].nome << " | " << left << setw(2) << "R$" << fixed
-             << setprecision(2) << p_1[i].preco << " | " << endl;
-      }
-    }
-    break;
-  case 2:
-    cout << left << setw(3) << "Cód"
-         << " | " << left << setw(exibir_maiorNome(p_1, p_2) + 2) << "Produto"
-         << " | " << left << setw(5) << "Preço"
-         << " | " << right << setw(2) << "Qtd" << endl;
-
-    for (int i = 0; i < p_2; i++) {
-      if (p_1[i].quantidade > 0) {
-        cout << left << setw(3) << p_1[i].codigo << " | " << left << setw(exibir_maiorNome(p_1, p_2) + 2)
-             << p_1[i].nome << " | " << left << setw(2) << "R$" << fixed
-             << setprecision(2) << p_1[i].preco << " | " << left << setw(2)
-             << p_1[i].quantidade << "un" << endl;
-      }
-    }
-    break;
-  case 3:
-        cout << left << setw(3) << "Cód"
-         << " | " << left << setw(exibir_maiorNome(p_1, p_2) + 2) << "Produto" << endl;
-
-    for (int i = 0; i < p_2; i++) {
-      if (p_1[i].quantidade > 0) {
-        cout << left << setw(3) << p_1[i].codigo << " | " << left << setw(exibir_maiorNome(p_1, p_2) + 2)
-             << p_1[i].nome << endl;
-      }
-    }
-    break;
-  default:
-    cout << "opção de exibição inválida!" << endl;
-    break;
-  }
 }
 void inicializar_baseDeDados(struct item p_1[]) {
   p_1[0] = {"Coca-Cola", 4.0, 15};
   p_1[1] = {"Ruffles", 3.5, 12};
   p_1[2] = {"Snickers", 2.5, 20};
   p_1[3] = {"Barrinha de Cereal", 1.75, 25};
-  p_1[4] = {"Água Mineral", 2.0, 20};
+  p_1[4] = {"Agua Mineral", 2.0, 20};
   p_1[5] = {"Oreo", 3.0, 18};
   p_1[6] = {"KitKat", 2.0, 15};
   p_1[7] = {"Red Bull", 8.0, 10};
@@ -103,16 +43,17 @@ void inicializar_baseDeDados(struct item p_1[]) {
   p_1[11] = {"Sprite", 3.0, 18};
   p_1[12] = {"Lacta", 2.5, 25};
   p_1[13] = {"Nature Valley", 2.0, 15};
-  p_1[14] = {"Água de Coco", 2.5, 20};
+  p_1[14] = {"Agua de Coco", 2.5, 20};
   p_1[15] = {"Club Social", 2.0, 18};
   p_1[16] = {"Twix", 2.5, 15};
   p_1[17] = {"Monster", 7.0, 10};
   p_1[18] = {"Bubbaloo", 1.75, 30};
-  p_1[19] = {"Nestlé", 3.5, 15};
+  p_1[19] = {"Nestle", 3.5, 15};
   p_1[20] = {"Cheetos", 3.0, 20};
 
   // Para inserir um novo produto na base de dados siga o modelo:
   // p_1[codigo do produto - 1] = {"nome do produto", preco, quantidade}
+  //OBS: Por favor, cadastre o nome dos produtos sem acento ou caracteres especiais
 }
 int inicializar(struct item p_1[]) {
   int cadastrados = 0;
@@ -135,6 +76,78 @@ int inicializar(struct item p_1[]) {
   }
 
   return cadastrados;
+}
+int exibir_maiorNome(struct item p_1[], int p_2){
+  int maior;
+  for(int i = 0; i < p_2; i++){
+    if(i == 0){
+      maior = p_1[i].nome.length();
+    } else {
+      if(p_1[i].nome.length() > maior){
+        maior = p_1[i].nome.length();
+      }
+    }
+  }
+  return maior;
+}
+void exibir(struct item p_1[], int p_2, int p_3) {
+  switch (p_3) {
+  case 1:
+    cout << left << setw(3) << "Cód"
+         << " | " << left << setw(exibir_maiorNome(p_1, p_2) + 2) << "Produto"
+         << " | " << left << setw(5) << "Preço" << endl;
+
+    for (int i = 0; i < p_2; i++) {
+      if (p_1[i].quantidade > 0) {
+        cout << left << setw(3) << p_1[i].codigo << " | " << left << setw(exibir_maiorNome(p_1, p_2) + 2)
+             << p_1[i].nome << " | " << left << setw(2) << "R$" << fixed
+             << setprecision(2) << p_1[i].preco << endl;
+      }
+    }
+    break;
+  case 2:
+    cout << left << setw(3) << "Cód"
+         << " | " << left << setw(exibir_maiorNome(p_1, p_2) + 2) << "Produto"
+         << " | " << left << setw(7) << "Preço"
+         << " | " << right << setw(2) << "Qtd" << endl;
+
+    for (int i = 0; i < p_2; i++) {
+      if (p_1[i].quantidade > 0) {
+        cout << left << setw(3) << p_1[i].codigo << " | " << left << setw(exibir_maiorNome(p_1, p_2) + 2)
+             << p_1[i].nome << " | " << left << setw(2) << "R$" << fixed
+             << setprecision(2) << p_1[i].preco << " | " << left << setw(2)
+             << p_1[i].quantidade << "un" << endl;
+      }
+    }
+    break;
+  case 3:
+        cout << left << setw(3) << "Cód"
+         << " | " << left << setw(exibir_maiorNome(p_1, p_2) + 2) << "Produto" << endl;
+
+    for (int i = 0; i < p_2; i++) {
+      if (p_1[i].quantidade > 0) {
+        cout << left << setw(3) << p_1[i].codigo << " | " << left << setw(exibir_maiorNome(p_1, p_2) + 2)
+             << p_1[i].nome << endl;
+      }
+    }
+    break;
+    case 4:
+    cout << left << setw(3) << "Cód"
+         << " | " << left << setw(exibir_maiorNome(p_1, p_2) + 2) << "Produto"
+         << " | " << right << setw(2) << "Qtd" << endl;
+
+    for (int i = 0; i < p_2; i++) {
+      if (p_1[i].quantidade > 0) {
+        cout << left << setw(3) << p_1[i].codigo << " | " << left << setw(exibir_maiorNome(p_1, p_2) + 2)
+             << p_1[i].nome << " | " << left << setw(2)
+             << p_1[i].quantidade << "un" << endl;
+      }
+    }
+    break;
+  default:
+    cout << "opção de exibição inválida!" << endl;
+    break;
+  }
 }
 void modoADM_alterar_nome(struct item p_1[], int p_2) {
   int selecionado;
@@ -170,7 +183,7 @@ void modoADM_alterar_preco(struct item p_1[], int p_2) {
 
   while (true) {
     cout << "----ALTERAR PREÇO-----" << endl;
-    exibir(p_1, p_2, 3);
+    exibir(p_1, p_2, 1);
     cout << "Insira o código do produto (ou 0 para cancelar): ";
     if (!(cin >> selecionado) || selecionado < 0 || selecionado > p_2) {
       cout << endl;
@@ -208,7 +221,7 @@ void modoADM_alterar_quantidade(struct item p_1[], int p_2) {
   while (true) {
     int selecionado;
     cout << "----ALTERAR QUANTIDADE-----" << endl;
-    exibir(p_1, p_2, 1);
+    exibir(p_1, p_2, 4);
     cout << "Insira o código do produto (ou 0 para cancelar): ";
     if (!(cin >> selecionado) || selecionado < 0 || selecionado > p_2) {
       cout << endl;
@@ -318,7 +331,7 @@ void modoADM_alterar_excluir(struct item p_1[], int *p_2) {
     int selecionado;
 
     cout << "----EXCLUIR PRODUTO-----" << endl;
-    exibir(p_1, *p_2, 1);
+    exibir(p_1, *p_2, 3);
     cout << "Insira o código do produto (ou 0 para cancelar): ";
     if (!(cin >> selecionado) || selecionado < 0 || selecionado > *p_2) {
       cout << endl;
@@ -359,12 +372,14 @@ void modoADM_alterar_excluir(struct item p_1[], int *p_2) {
 void modoADM_cadastrar(struct item p_1[], int *p_2) {
   cout << "----CADASTRO DE PRODUTOS----" << endl;
 
+  cout << "OBS: Por favor, não use acentos \nou caracteres especiais" << endl;
+  cout << endl;
   cout << "Insira o nome: ";
   cin >> p_1[*p_2].nome;
 
   while (true) {
     cout << "Insira o preco de " << p_1[*p_2].nome << ": R$";
-    if (!(cin >> p_1[*p_2].preco)) {
+    if (!(cin >> p_1[*p_2].preco) || p_1[*p_2].preco <= 0) {
       cout << endl;
       cout << "Insira um valor válido!" << endl;
       cout << endl;
@@ -379,7 +394,7 @@ void modoADM_cadastrar(struct item p_1[], int *p_2) {
 
   while (true) {
     cout << "Insira a quantidade de " << p_1[*p_2].nome << ":";
-    if (!(cin >> p_1[*p_2].quantidade)) {
+    if (!(cin >> p_1[*p_2].quantidade) || p_1[*p_2].quantidade <= 0) {
       cout << endl;
       cout << "Insira um valor válido!" << endl;
       cout << endl;
@@ -397,7 +412,7 @@ void modoADM_cadastrar(struct item p_1[], int *p_2) {
   cout << "\n"
        << p_1[*p_2].quantidade << "un de " << p_1[*p_2].nome << " à R$"
        << p_1[*p_2].preco
-       << "foram cadastradas com \nsucesso sob o código: " << p_1[*p_2].codigo
+       << " foram cadastradas\ncom sucesso sob o código: " << p_1[*p_2].codigo
        << endl;
   (*p_2)++;
 }
@@ -519,7 +534,7 @@ void modoADM(struct item p_1[], int *p_2, float p_3) {
     case 3:
       system("clear");
       cout << "-----INVENTARIO-----" << endl;
-      exibir(p_1, *p_2, 1);
+      exibir(p_1, *p_2, 2);
       pausa();
       system("clear");
       break;
@@ -600,7 +615,7 @@ int main() {
 
     cout << "-----MÁQUINA DE VENDAS------" << endl;
     cout << endl;
-    exibir(produtos, qtdProdutos, 2);
+    exibir(produtos, qtdProdutos, 1);
     cout << endl;
     cout << "Insira o código do produto: ";
     cin >> inserido;
