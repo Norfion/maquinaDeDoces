@@ -189,6 +189,7 @@ void modoADM_alterar_preco(struct item p_1[], int p_2) {
         return;
       } else {
         while (true) {
+          system("clear");
           cout << p_1[selecionado - 1].nome << " R$"
                << p_1[selecionado - 1].preco << " será alterado para: ";
           if (!(cin >> p_1[selecionado - 1].preco) ||
@@ -199,6 +200,7 @@ void modoADM_alterar_preco(struct item p_1[], int p_2) {
             cin.clear();
             cin.ignore(tudo);
           } else {
+            system("clear");
             cout << "Alteração realizada com sucesso!" << endl;
             pausa();
             return;
