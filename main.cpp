@@ -33,11 +33,11 @@ void pausa() {
 // Base de dados dos produtos nativos do sistema
 void inicializar_baseDeDados(struct item p_1[]) {
   p_1[0] = {"Coca-Cola", 4.0, 1};
-  p_1[1] = {"Ruffles", 7, 12};
-  p_1[2] = {"Snickers", 2.5, 20};
-  p_1[3] = {"Barrinha de Cereal", 1.75, 25};
-  p_1[4] = {"Agua Mineral", 2.0, 20};
-  p_1[5] = {"Oreo", 3.0, 18};
+  p_1[1] = {"Ruffles", 7, 1};
+  p_1[2] = {"Snickers", 2.5, 1};
+  p_1[3] = {"Barrinha de Cereal", 1.75, 1};
+  p_1[4] = {"Agua Mineral", 2.0, 1};
+  p_1[5] = {"Oreo", 3.0, 1};
   p_1[6] = {"KitKat", 4, 15};
   p_1[7] = {"Red Bull", 8.0, 10};
   p_1[8] = {"Trident", 3, 30};
@@ -124,12 +124,14 @@ void exibir(struct item p_1[], int p_2, int p_3) {
          << " | " << right << setw(2) << "Qtd" << endl;
 
     for (int i = 0; i < p_2; i++) {
-      if (p_1[i].quantidade > 0) {
-        cout << left << setw(3) << p_1[i].codigo << " | " << left
-             << setw(exibir_maiorNome(p_1, p_2) + 2) << p_1[i].nome << " | "
-             << left << setw(3) << "R$" << fixed << setprecision(2)
-             << p_1[i].preco << " | " << left << setw(2) << p_1[i].quantidade
-             << "un" << endl;
+      cout << left << setw(3) << p_1[i].codigo << " | " << left
+           << setw(exibir_maiorNome(p_1, p_2) + 2) << p_1[i].nome << " | "
+           << left << setw(3) << "R$" << fixed << setprecision(2)
+           << p_1[i].preco;
+      if (!(p_1[i].quantidade > 0)) {
+        cout << " | " << left << setw(2) << "ESGOTADO" << endl;
+      } else {
+        cout << " | " << left << setw(2) << p_1[i].quantidade << "un" << endl;
       }
     }
     break;
@@ -341,40 +343,38 @@ void modoADM_excluir(struct item p_1[], int *p_2) {
     int selecionado;
 
     cout << "----EXCLUIR PRODUTO-----" << endl;
-    exibir(p_1, *p_2, 3);
+    exibir(p_1, *p_2, 2);
     cout << "Insira o código do produto (ou 0 para cancelar): ";
     if (!(cin >> selecionado) || selecionado < 0 || selecionado > *p_2) {
-      cout << endl;
+      system("clear");
       cout << "Insira um código válido!" << endl;
-      cout << endl;
+      sleep(delay);
       cin.clear();
       cin.ignore(tudo);
+    } else if (selecionado == 0) {
+      return;
     } else {
-      if (selecionado == 0) {
-        return;
-      } else {
-        int selecionado_2;
+      int selecionado_2;
+      system("clear");
+      cout << "Confirmar exclusão de: " << p_1[selecionado - 1].nome
+           << "? \n1 - Sim\nOutra tecla - Não\n\nOpção: ";
+      cin >> selecionado_2;
 
-        cout << "Confirmar exclusão de: " << p_1[selecionado - 1].nome
-             << "? \n1 - Sim\nOutra tecla - Não\n\nOpção: ";
-        cin >> selecionado_2;
-
-        if (selecionado_2 == 1) {
-
-          for (int i = selecionado - 1; i < *p_2; i++) {
-            p_1[i].nome = p_1[i + 1].nome;
-            p_1[i].preco = p_1[i + 1].preco;
-            p_1[i].quantidade = p_1[i + 1].quantidade;
-            p_1[i].quantidade = p_1[i + 1].codigo;
-          }
-          (*p_2)--;
-
-          cout << endl;
-          cout << "Produto excluido com sucesso!" << endl;
-          break;
-        } else {
-          break;
+      switch (selecionado_2) {
+      case 1:
+        for (int i = selecionado - 1; i < *p_2; i++) {
+          p_1[i].nome = p_1[i + 1].nome;
+          p_1[i].preco = p_1[i + 1].preco;
+          p_1[i].quantidade = p_1[i + 1].quantidade;
+          p_1[i].quantidade = p_1[i + 1].codigo;
         }
+        (*p_2)--;
+
+        system("clear");
+        cout << "Produto excluido com sucesso!" << endl;
+        return;
+      default:
+        return;
       }
     }
   }
@@ -581,6 +581,7 @@ void modoADM(struct item p_1[], int *p_2, float p_3, int *p_4) {
       case 3:
         system("clear");
         modoADM_excluir(p_1, p_2);
+        pausa();
         system("clear");
         break;
       case 4:
