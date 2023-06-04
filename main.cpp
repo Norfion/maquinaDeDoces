@@ -1,4 +1,3 @@
-#include <cstdlib>
 #include <iomanip>
 #include <iostream>
 #include <string>
@@ -10,6 +9,7 @@ const int qtdMaxDeProdutos = 50;
 // Adiciona 1 unidade de espaço vazio para alterções no código do produto
 const int tamanhoDoArray = qtdMaxDeProdutos + 1;
 const int delay = 2;
+int chaveDeAcesso = 121212;
 #define tudo 100, '\n'
 
 // Cria as caracteristicas dos p_1
@@ -20,6 +20,8 @@ struct item {
   int codigo;
 };
 
+// Pausa o programa até o usuario inserir um valor
+// NOTA: Tentar substituir por system("pause")
 void pausa() {
   string pausa;
   cout << endl;
@@ -28,6 +30,7 @@ void pausa() {
   cin.clear();
   cin.ignore(tudo);
 }
+// Base de dados dos produtos nativos do sistema
 void inicializar_baseDeDados(struct item p_1[]) {
   p_1[0] = {"Coca-Cola", 4.0, 1};
   p_1[1] = {"Ruffles", 7, 12};
@@ -56,6 +59,7 @@ void inicializar_baseDeDados(struct item p_1[]) {
   // OBS: Por favor, cadastre o nome dos produtos sem acento ou caracteres
   // especiais
 }
+// Carrega a base de dados
 int inicializar(struct item p_1[]) {
   int cadastrados = 0;
 
@@ -67,8 +71,8 @@ int inicializar(struct item p_1[]) {
   // Carrega base de dados e substitui os produtos nao existentes
   inicializar_baseDeDados(p_1);
 
-  // Coloca o codigo dos produtos e retorna a quantidade de produtos ja
-  // cadastrados
+  // Verifica se as quantidades dos produtos não são negativas para adicionar os
+  // códigos e conta a quantidade de produtos que existem na base de dados
   for (int i = 0; i < qtdMaxDeProdutos; i++) {
     if (p_1[i].quantidade >= 0) {
       p_1[i].codigo = (i + 1);
@@ -76,10 +80,12 @@ int inicializar(struct item p_1[]) {
     }
   }
 
+  // Retorna quantos produtos existem na base de dados
   return cadastrados;
 }
 int exibir_maiorNome(struct item p_1[], int p_2) {
   int maior;
+  // Calcula qual o maior nome do produto passado como parametro em p_1
   for (int i = 0; i < p_2; i++) {
     if (i == 0) {
       maior = p_1[i].nome.length();
@@ -89,9 +95,13 @@ int exibir_maiorNome(struct item p_1[], int p_2) {
       }
     }
   }
+  // Retorna a quantidade de caracteres do maior nome encontrado
   return maior;
 }
 void exibir(struct item p_1[], int p_2, int p_3) {
+  // Cria varios menus de exibição com ou sem algumas das seguintes
+  // propriedades: codigo, nome, preco ou quantidade Além disso, usa a função
+  // exibir_maiorNome para formatar o tamanho do menu de exibição
   switch (p_3) {
   case 1:
     cout << left << setw(3) << "Cód"
@@ -481,6 +491,9 @@ void modoADM_trocarSenha(int *p_1) {
     cout << "Chave de acesso atual: " << *p_1 << endl;
     cout << endl;
     cout << "Insira a nova chave (ou 0 para cancelar): ";
+    // Verifica se o caracter inserido é um inteiro e se ele tem 6 digitos (para
+    // ter uma senha forte, além de impedir que a senha seja igual a um código
+    // de produto e gerar erro)
     if (!(cin >> selecionado) || (selecionado < 100000 && selecionado != 0)) {
       system("clear");
       cout << "Insira uma chave válida!\n\nOBS: A chave precisa ser um número "
@@ -494,14 +507,18 @@ void modoADM_trocarSenha(int *p_1) {
     } else {
       if (selecionado == 0) {
         return;
-      } else if (selecionado == chaveAntiga) {
+      }
+      // Verifica se a nova senha é diferente da anterior
+      else if (selecionado == chaveAntiga) {
         system("clear");
         cout << "A nova chave de acesso não pode ser igual à anterior!" << endl;
         sleep(delay);
         cin.clear();
         cin.ignore(tudo);
         system("clear");
-      } else {
+      }
+      // Substitui o valor da variavel ChaveDeAcesso com a nova senha informada
+      else {
         system("clear");
         cout << selecionado << " cadastrada com sucesso como nova chave!"
              << endl;
@@ -514,12 +531,15 @@ void modoADM_trocarSenha(int *p_1) {
 void modoADM(struct item p_1[], int *p_2, float p_3, int *p_4) {
   int inserido;
 
+  // Cria um loop para sempre mostrar o menu de administrador
   while (true) {
     cout << "-----MODO ADMNISTRADOR-----" << endl;
     cout << endl;
     cout << "Selecione uma opção:\n \n1 - Cadastrar novo produto\n2 - "
             "Alterar produto\n3 - Excluir um produto\n4 - Inventario\n5 - "
             "Caixa\n6 - Trocar senha\n\nOutra tecla - Sair\n\nOpção: ";
+    // Verifica se o caracter  inserido é do mesmo tipo da variavel, caso não
+    // seja, encerra a função
     if (!(cin >> inserido)) {
       system("clear");
       cout << "Saindo do modo administrador..." << endl;
@@ -528,9 +548,14 @@ void modoADM(struct item p_1[], int *p_2, float p_3, int *p_4) {
       cin.ignore(tudo);
       system("clear");
       return;
-    } else {
+    }
+    // Caso tenha sido inserido um numero, verifica em qual das opções se
+    // encaixa
+    else {
       switch (inserido) {
       case 1:
+        // Verifica se há espaço dentro do array de produtos para inserir um
+        // novo produto
         if (*p_2 < qtdMaxDeProdutos) {
           system("clear");
           modoADM_cadastrar(p_1, p_2);
@@ -591,6 +616,8 @@ void modoADM(struct item p_1[], int *p_2, float p_3, int *p_4) {
   }
 }
 void comprar(struct item p_1[], int p_2, float *p_3) {
+
+  // Cria um loop para sempre exibir o menu de compra
   while (true) {
     float pagamento;
     cout << "----COMPRAR-----" << endl;
@@ -598,6 +625,8 @@ void comprar(struct item p_1[], int p_2, float *p_3) {
     cout << "Preço: R$" << p_1[p_2 - 1].preco << endl;
     cout << endl;
     cout << "Insira o dinheiro (ou 0 para cancelar): R$";
+
+    // Verifica se o valor inserido como pagamento é do tipo float
     if (!(cin >> pagamento)) {
       system("clear");
       cout << "Insira um valor válido!" << endl;
@@ -606,9 +635,13 @@ void comprar(struct item p_1[], int p_2, float *p_3) {
       cin.clear();
       cin.ignore(tudo);
       system("clear");
-    } else if (pagamento == 0) {
+    }
+    // Caso o valor inserido seja 0, encerra a função
+    else if (pagamento == 0) {
       return;
-    } else if (pagamento >= p_1[p_2 - 1].preco) {
+    }
+    // Verifica se o valor é suficiente para pagar o produto
+    else if (pagamento >= p_1[p_2 - 1].preco) {
       system("clear");
       cout << "Obrigado pela compra!"
            << "\n\nTroco: R$" << (pagamento - p_1[p_2 - 1].preco) << endl;
@@ -617,7 +650,10 @@ void comprar(struct item p_1[], int p_2, float *p_3) {
 
       pausa();
       return;
-    } else {
+    }
+    // Informa que o valor é insuficiente (menor que o preço do produto) e
+    // encerra a função
+    else {
       system("clear");
       cout << "Dinheiro insuficiente!\nFaltam R$"
            << p_1[p_2 - 1].preco - pagamento << endl;
@@ -630,12 +666,16 @@ void comprar(struct item p_1[], int p_2, float *p_3) {
 }
 
 int main() {
+  // Carrega a estrutura dos produtos
   struct item produtos[tamanhoDoArray];
+  // Inicializa a base de dados e retorna quantos produtos há na base para o
+  // sinalizador
   int qtdProdutos = inicializar(produtos);
-  int chaveDeAcesso = 121212;
   float cofre = 0.00;
 
   system("clear");
+
+  // Cria um loop para sempre exibir o menu de vendas
   while (true) {
     int inserido;
     float pagamento;
@@ -645,6 +685,8 @@ int main() {
     exibir(produtos, qtdProdutos, 1);
     cout << endl;
     cout << "Insira o código do produto: ";
+    // Verifica se o código inserido é do tipo int e se está dentro do intervalo
+    // de produtos
     if (!(cin >> inserido) || inserido <= 0 ||
         (inserido > qtdProdutos && inserido != chaveDeAcesso)) {
       system("clear");
@@ -653,13 +695,17 @@ int main() {
       cin.clear();
       cin.ignore(tudo);
       system("clear");
-    } else if (inserido == chaveDeAcesso) {
+    }
+    // Verifica se o codigo inserido é a chavde de acesso
+    else if (inserido == chaveDeAcesso) {
       system("clear");
       cout << "Entrando no modo administrador..." << endl;
       sleep(delay);
       system("clear");
       modoADM(produtos, &qtdProdutos, cofre, &chaveDeAcesso);
-    } else if (produtos[inserido - 1].quantidade <= 0) {
+    }
+    // Verifica se há produtos disponiveis em estoque (quantidade > 0)
+    else if (!(produtos[inserido - 1].quantidade > 0)) {
       system("clear");
       cout << "Infelizmente " << produtos[inserido - 1].nome
            << " está em falta..." << endl;
@@ -668,7 +714,9 @@ int main() {
       cin.clear();
       cin.ignore(tudo);
       system("clear");
-    } else {
+    }
+    // Entra no modo de compra
+    else {
       int opcao;
 
       system("clear");
