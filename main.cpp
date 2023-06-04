@@ -177,7 +177,7 @@ void modoADM_alterar_nome(struct item p_1[], int p_2) {
         cout << endl;
         cout << "Alteração realizada com sucesso!" << endl;
         sleep(delay);
-        break;
+        return;
       }
     }
   }
@@ -213,10 +213,9 @@ void modoADM_alterar_preco(struct item p_1[], int p_2) {
             cin.ignore(tudo);
           } else {
             cout << "Alteração realizada com sucesso!" << endl;
-            break;
+            return;
           }
         }
-        break;
       }
     }
   }
@@ -251,10 +250,9 @@ void modoADM_alterar_quantidade(struct item p_1[], int p_2) {
             cin.ignore(tudo);
           } else {
             cout << "Alteração realizada com sucesso!" << endl;
-            break;
+            return;
           }
         }
-        break;
       }
     }
   }
@@ -268,64 +266,60 @@ void modoADM_alterar_codigo(struct item p_1[], int *p_2) {
     cout << "Insira o código do produto (ou 0 para cancelar): ";
     if (!(cin >> selecionado) || selecionado < 0 || selecionado > *p_2) {
       cout << endl;
-      cout << "Insira um código válido!" << endl;
+      cout << "Código inválido!" << endl;
       cout << endl;
       sleep(delay);
       cin.clear();
       cin.ignore(tudo);
+    } else if (selecionado == 0) {
+      return;
     } else {
-      if (selecionado == 0) {
-        return;
-      } else {
-        while (true) {
-          int selecionado_2;
+      while (true) {
+        int selecionado_2;
 
-          cout << "Código " << p_1[selecionado - 1].codigo << " ("
-               << p_1[selecionado - 1].nome
-               << ") será alterado para (ou 0 para cancelar): ";
+        cout << "Código " << p_1[selecionado - 1].codigo << " ("
+             << p_1[selecionado - 1].nome
+             << ") será alterado para (ou 0 para cancelar): ";
 
-          if (!(cin >> selecionado_2) || selecionado_2 < 0 ||
-              selecionado_2 > *p_2) {
-            cout << endl;
-            cout << "Insira uma código válido!" << endl;
-            cout << endl;
-            sleep(delay);
-            cin.clear();
-            cin.ignore(tudo);
+        if (!(cin >> selecionado_2) || selecionado_2 < 0 ||
+            selecionado_2 > *p_2) {
+          cout << endl;
+          cout << "Código inválido!" << endl;
+          cout << endl;
+          sleep(delay);
+          cin.clear();
+          cin.ignore(tudo);
+        } else {
+          if (selecionado_2 == 0) {
+            return;
           } else {
-            if (selecionado_2 == 0) {
-              break;
-            } else {
-              // Cria um novo espaço dentro do array de produtos
-              (*p_2)++;
+            // Cria um novo espaço dentro do array de produtos
+            (*p_2)++;
 
-              // copia as propriedades do produto que sera substituido para o
-              // novo espaço do array
-              p_1[*p_2].nome = p_1[selecionado_2 - 1].nome;
-              p_1[*p_2].preco = p_1[selecionado_2 - 1].preco;
-              p_1[*p_2].quantidade = p_1[selecionado_2 - 1].quantidade;
+            // copia as propriedades do produto que sera substituido para o
+            // novo espaço do array
+            p_1[*p_2].nome = p_1[selecionado_2 - 1].nome;
+            p_1[*p_2].preco = p_1[selecionado_2 - 1].preco;
+            p_1[*p_2].quantidade = p_1[selecionado_2 - 1].quantidade;
 
-              // Substitui as propriedades do produto #1 para o produto #2
-              p_1[selecionado_2 - 1].nome = p_1[selecionado - 1].nome;
-              p_1[selecionado_2 - 1].preco = p_1[selecionado - 1].preco;
-              p_1[selecionado_2 - 1].quantidade =
-                  p_1[selecionado - 1].quantidade;
-              p_1[selecionado_2 - 1].codigo = selecionado_2;
+            // Substitui as propriedades do produto #1 para o produto #2
+            p_1[selecionado_2 - 1].nome = p_1[selecionado - 1].nome;
+            p_1[selecionado_2 - 1].preco = p_1[selecionado - 1].preco;
+            p_1[selecionado_2 - 1].quantidade = p_1[selecionado - 1].quantidade;
+            p_1[selecionado_2 - 1].codigo = selecionado_2;
 
-              // Substitui as propriedades do produto #2 para o produto #1
-              p_1[selecionado - 1].nome = p_1[*p_2].nome;
-              p_1[selecionado - 1].preco = p_1[*p_2].preco;
-              p_1[selecionado - 1].quantidade = p_1[*p_2].quantidade;
-              p_1[selecionado - 1].codigo = selecionado;
+            // Substitui as propriedades do produto #2 para o produto #1
+            p_1[selecionado - 1].nome = p_1[*p_2].nome;
+            p_1[selecionado - 1].preco = p_1[*p_2].preco;
+            p_1[selecionado - 1].quantidade = p_1[*p_2].quantidade;
+            p_1[selecionado - 1].codigo = selecionado;
 
-              // Apaga o espaço extra criado
-              (*p_2)--;
-              cout << "Alteração realizada com sucesso!" << endl;
-              break;
-            }
+            // Apaga o espaço extra criado
+            (*p_2)--;
+            cout << "Alteração realizada com sucesso!" << endl;
+            return;
           }
         }
-        break;
       }
     }
   }
@@ -438,21 +432,25 @@ void modoADM_alterar(struct item p_1[], int *p_2) {
       case 1:
         system("clear");
         modoADM_alterar_nome(p_1, *p_2);
+        pausa();
         system("clear");
         break;
       case 2:
         system("clear");
         modoADM_alterar_preco(p_1, *p_2);
+        pausa();
         system("clear");
         break;
       case 3:
         system("clear");
         modoADM_alterar_quantidade(p_1, *p_2);
+        pausa();
         system("clear");
         break;
       case 4:
         system("clear");
         modoADM_alterar_codigo(p_1, p_2);
+        pausa();
         system("clear");
         break;
       default:
@@ -559,7 +557,7 @@ void modoADM(struct item p_1[], int *p_2, float p_3, int *p_4) {
         break;
       case 4:
         system("clear");
-        cout << "-----INVENTARIO-----" << endl;
+        cout << "--------INVENTARIO---------" << endl;
         exibir(p_1, *p_2, 2);
         sleep(delay);
         pausa();
@@ -632,7 +630,7 @@ int main() {
   struct item produtos[tamanhoDoArray];
   int qtdProdutos = inicializar(produtos);
   int chaveDeAcesso = 121212;
-  float cofre = 0.0;
+  float cofre = 0.00;
 
   system("clear");
   while (true) {
