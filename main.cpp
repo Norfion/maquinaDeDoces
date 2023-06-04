@@ -163,7 +163,7 @@ void modoADM_alterar_nome(struct item p_1[], int p_2) {
         cin >> p_1[selecionado - 1].nome;
         system("clear");
         cout << "Alteração realizada com sucesso!" << endl;
-        sleep(delay);
+        pausa();
         return;
       }
     }
@@ -200,6 +200,7 @@ void modoADM_alterar_preco(struct item p_1[], int p_2) {
             cin.ignore(tudo);
           } else {
             cout << "Alteração realizada com sucesso!" << endl;
+            pausa();
             return;
           }
         }
@@ -240,6 +241,7 @@ void modoADM_alterar_quantidade(struct item p_1[], int p_2) {
           } else {
             system("clear");
             cout << "Alteração realizada com sucesso!" << endl;
+            pausa();
             return;
           }
         }
@@ -309,6 +311,7 @@ void modoADM_alterar_codigo(struct item p_1[], int *p_2) {
 
             system("clear");
             cout << "Alteração realizada com sucesso!" << endl;
+            pausa();
             return;
           }
         }
@@ -351,6 +354,7 @@ void modoADM_excluir(struct item p_1[], int *p_2) {
 
         system("clear");
         cout << "Produto excluido com sucesso!" << endl;
+        pausa();
         return;
       default:
         return;
@@ -403,6 +407,7 @@ void modoADM_cadastrar(struct item p_1[], int *p_2) {
        << " foram cadastradas\ncom sucesso sob o código: " << p_1[*p_2].codigo
        << endl;
   (*p_2)++;
+  pausa();
 }
 void modoADM_alterar(struct item p_1[], int *p_2) {
   while (true) {
@@ -422,25 +427,21 @@ void modoADM_alterar(struct item p_1[], int *p_2) {
       case 1:
         system("clear");
         modoADM_alterar_nome(p_1, *p_2);
-        pausa();
         system("clear");
         break;
       case 2:
         system("clear");
         modoADM_alterar_preco(p_1, *p_2);
-        pausa();
         system("clear");
         break;
       case 3:
         system("clear");
         modoADM_alterar_quantidade(p_1, *p_2);
-        pausa();
         system("clear");
         break;
       case 4:
         system("clear");
         modoADM_alterar_codigo(p_1, p_2);
-        pausa();
         system("clear");
         return;
       default:
@@ -460,6 +461,7 @@ void modoADM_caixa(struct item p_1[], int p_2, float p_3) {
   cout << "Total em produtos: R$" << somaPreco << endl;
   cout << endl;
   cout << "TOTAL: R$" << p_3 + somaPreco << endl;
+  pausa();
 }
 void modoADM_trocarSenha(int *p_1) {
   while (true) {
@@ -502,6 +504,7 @@ void modoADM_trocarSenha(int *p_1) {
         cout << selecionado << " cadastrada com sucesso como nova chave!"
              << endl;
         (*p_1) = selecionado;
+        pausa();
         return;
       }
     }
@@ -558,27 +561,23 @@ void modoADM(struct item p_1[], int *p_2, float p_3, int *p_4) {
       case 3:
         system("clear");
         modoADM_excluir(p_1, p_2);
-        pausa();
         system("clear");
         break;
       case 4:
         system("clear");
         cout << "--------INVENTARIO---------" << endl;
         exibir(p_1, *p_2, 2);
-        sleep(delay);
         pausa();
         system("clear");
         break;
       case 5:
         system("clear");
         modoADM_caixa(p_1, *p_2, p_3);
-        pausa();
         system("clear");
         break;
       case 6:
         system("clear");
         modoADM_trocarSenha(p_4);
-        pausa();
         system("clear");
         break;
       default:
