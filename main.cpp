@@ -637,7 +637,6 @@ int main() {
     int inserido;
     float pagamento;
 
-    cout << "senha: " << chaveDeAcesso << endl;
     cout << "-----MÁQUINA DE VENDAS------" << endl;
     cout << endl;
     exibir(produtos, qtdProdutos, 1);
@@ -652,37 +651,45 @@ int main() {
       cin.clear();
       cin.ignore(tudo);
       system("clear");
-    } else {
+    } else if (inserido == chaveDeAcesso) {
       system("clear");
-      if (inserido == chaveDeAcesso) {
-        system("clear");
-        cout << endl;
-        cout << "Entrando no modo administrador..." << endl;
-        sleep(delay);
-        system("clear");
-        modoADM(produtos, &qtdProdutos, cofre, &chaveDeAcesso);
-      } else {
-        int opcao;
-        cout << "-----COMPRAR-----" << endl;
-        cout << endl;
-        cout << "Selecionado: " << produtos[inserido - 1].nome << " R$"
-             << produtos[inserido - 1].preco << endl;
-        cout << endl;
-        cout << "Confirma a comprar?\n1 - Sim\nOutra tecla - Não\n\nOpção: ";
-        cin >> opcao;
+      cout << endl;
+      cout << "Entrando no modo administrador..." << endl;
+      sleep(delay);
+      system("clear");
+      modoADM(produtos, &qtdProdutos, cofre, &chaveDeAcesso);
+    } else if (produtos[inserido - 1].quantidade <= 0) {
+      system("clear");
+      cout << "Infelizmente " << produtos[inserido - 1].nome
+           << " está em falta..." << endl;
+      cout << "Por favor, selecione outro produto" << endl;
+      sleep(delay);
+      cin.clear();
+      cin.ignore(tudo);
+      system("clear");
+    } else {
+      int opcao;
 
-        switch (opcao) {
-        case 1:
-          system("clear");
-          comprar(produtos, inserido, &cofre);
-          system("clear");
-          break;
-        default:
-          system("clear");
-          cin.clear();
-          cin.ignore(tudo);
-          break;
-        }
+      system("clear");
+      cout << "-----COMPRAR-----" << endl;
+      cout << endl;
+      cout << "Selecionado: " << produtos[inserido - 1].nome << " R$"
+           << produtos[inserido - 1].preco << endl;
+      cout << endl;
+      cout << "Confirma a comprar?\n1 - Sim\nOutra tecla - Não\n\nOpção: ";
+      cin >> opcao;
+
+      switch (opcao) {
+      case 1:
+        system("clear");
+        comprar(produtos, inserido, &cofre);
+        system("clear");
+        break;
+      default:
+        system("clear");
+        cin.clear();
+        cin.ignore(tudo);
+        break;
       }
     }
   }
