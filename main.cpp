@@ -5,9 +5,9 @@
 
 using namespace std;
 // Define as constantes para o funcionamento do código;
-const int qtdMaxDeProdutos = 50;
+const int qtdMaxDeProdutos = 20;
 // Adiciona 1 unidade de espaço vazio para alterções no código do produto
-const int tamanhoDoArray = qtdMaxDeProdutos + 1;
+const int tamanhoDoArray = qtdMaxDeProdutos + 3;
 const int delay = 2;
 int chaveDeAcesso = 121212;
 #define tudo 100, '\n'
@@ -47,12 +47,11 @@ void inicializar_baseDeDados(struct item p_1[]) {
   p_1[12] = {"Lacta", 6.5, 25};
   p_1[13] = {"Nature Valley", 2.0, 15};
   p_1[14] = {"Agua de Coco", 4.5, 20};
-  p_1[15] = {"Club Social", 2.0, 18};
-  p_1[16] = {"Twix", 2.5, 15};
-  p_1[17] = {"Monster", 7.0, 10};
-  p_1[18] = {"Bubbaloo", 1, 30};
-  p_1[19] = {"Nestle", 3.5, 15};
-  p_1[20] = {"Cheetos", 8, 20};
+  p_1[15] = {"Twix", 2.5, 15};
+  p_1[16] = {"Monster", 7.0, 10};
+  p_1[17] = {"Bubbaloo", 1, 30};
+  p_1[18] = {"Nestle", 3.5, 15};
+  p_1[19] = {"Cheetos", 8, 20};
 
   // Para inserir um novo produto na base de dados siga o modelo:
   // p_1[codigo do produto - 1] = {"nome do produto", preco, quantidade}
@@ -135,31 +134,6 @@ void exibir(struct item p_1[], int p_2, int p_3) {
       }
     }
     break;
-  case 3:
-    cout << left << setw(3) << "Cód"
-         << " | " << left << setw(exibir_maiorNome(p_1, p_2) + 2) << "Produto"
-         << endl;
-
-    for (int i = 0; i < p_2; i++) {
-      if (p_1[i].quantidade > 0) {
-        cout << left << setw(3) << p_1[i].codigo << " | " << left
-             << setw(exibir_maiorNome(p_1, p_2) + 2) << p_1[i].nome << endl;
-      }
-    }
-    break;
-  case 4:
-    cout << left << setw(3) << "Cód"
-         << " | " << left << setw(exibir_maiorNome(p_1, p_2) + 2) << "Produto"
-         << " | " << right << setw(2) << "Qtd" << endl;
-
-    for (int i = 0; i < p_2; i++) {
-      if (p_1[i].quantidade > 0) {
-        cout << left << setw(3) << p_1[i].codigo << " | " << left
-             << setw(exibir_maiorNome(p_1, p_2) + 2) << p_1[i].nome << " | "
-             << left << setw(2) << p_1[i].quantidade << "un" << endl;
-      }
-    }
-    break;
   default:
     cout << "opção de exibição inválida!" << endl;
     break;
@@ -169,13 +143,14 @@ void modoADM_alterar_nome(struct item p_1[], int p_2) {
   int selecionado;
 
   while (true) {
+    system("clear");
     cout << "----ALTERAR NOME-----" << endl;
-    exibir(p_1, p_2, 3);
+    exibir(p_1, p_2, 2);
+    cout << endl;
     cout << "Insira o código do produto (ou 0 para cancelar): ";
     if (!(cin >> selecionado) || selecionado < 0 || selecionado > p_2) {
-      cout << endl;
+      system("clear");
       cout << "Insira um código válido!" << endl;
-      cout << endl;
       sleep(delay);
       cin.clear();
       cin.ignore(tudo);
@@ -186,7 +161,7 @@ void modoADM_alterar_nome(struct item p_1[], int p_2) {
         system("clear");
         cout << p_1[selecionado - 1].nome << " será alterado para: ";
         cin >> p_1[selecionado - 1].nome;
-        cout << endl;
+        system("clear");
         cout << "Alteração realizada com sucesso!" << endl;
         sleep(delay);
         return;
@@ -198,13 +173,14 @@ void modoADM_alterar_preco(struct item p_1[], int p_2) {
   int selecionado;
 
   while (true) {
+    system("clear");
     cout << "----ALTERAR PREÇO-----" << endl;
-    exibir(p_1, p_2, 1);
+    exibir(p_1, p_2, 2);
+    cout << endl;
     cout << "Insira o código do produto (ou 0 para cancelar): ";
     if (!(cin >> selecionado) || selecionado < 0 || selecionado > p_2) {
-      cout << endl;
+      system("clear");
       cout << "Insira um código válido!" << endl;
-      cout << endl;
       sleep(delay);
       cin.clear();
       cin.ignore(tudo);
@@ -217,9 +193,8 @@ void modoADM_alterar_preco(struct item p_1[], int p_2) {
                << p_1[selecionado - 1].preco << " será alterado para: ";
           if (!(cin >> p_1[selecionado - 1].preco) ||
               p_1[selecionado - 1].preco <= 0) {
-            cout << endl;
+            system("clear");
             cout << "Insira um preço válido!" << endl;
-            cout << endl;
             sleep(delay);
             cin.clear();
             cin.ignore(tudo);
@@ -235,32 +210,35 @@ void modoADM_alterar_preco(struct item p_1[], int p_2) {
 void modoADM_alterar_quantidade(struct item p_1[], int p_2) {
   while (true) {
     int selecionado;
+    system("clear");
     cout << "----ALTERAR QUANTIDADE-----" << endl;
-    exibir(p_1, p_2, 4);
+    exibir(p_1, p_2, 2);
+    cout << endl;
     cout << "Insira o código do produto (ou 0 para cancelar): ";
     if (!(cin >> selecionado) || selecionado < 0 || selecionado > p_2) {
-      cout << endl;
+      system("clear");
       cout << "Insira um código válido!" << endl;
-      cout << endl;
       sleep(delay);
       cin.clear();
       cin.ignore(tudo);
     } else {
       if (selecionado == 0) {
+        system("clear");
         return;
       } else {
         while (true) {
+          system("clear");
           cout << p_1[selecionado - 1].quantidade << "un de "
                << p_1[selecionado - 1].nome << " será alterado para: ";
           if (!(cin >> p_1[selecionado - 1].quantidade) ||
               p_1[selecionado - 1].quantidade < 0) {
-            cout << endl;
+            system("clear");
             cout << "Insira uma quantidade válida!" << endl;
-            cout << endl;
             sleep(delay);
             cin.clear();
             cin.ignore(tudo);
           } else {
+            system("clear");
             cout << "Alteração realizada com sucesso!" << endl;
             return;
           }
@@ -272,14 +250,14 @@ void modoADM_alterar_quantidade(struct item p_1[], int p_2) {
 void modoADM_alterar_codigo(struct item p_1[], int *p_2) {
   while (true) {
     int selecionado;
-
+    system("clear");
     cout << "----ALTERAR CÓDIGO-----" << endl;
-    exibir(p_1, *p_2, 3);
+    exibir(p_1, *p_2, 2);
+    cout << endl;
     cout << "Insira o código do produto (ou 0 para cancelar): ";
     if (!(cin >> selecionado) || selecionado < 0 || selecionado > *p_2) {
-      cout << endl;
+      system("clear");
       cout << "Código inválido!" << endl;
-      cout << endl;
       sleep(delay);
       cin.clear();
       cin.ignore(tudo);
@@ -289,15 +267,15 @@ void modoADM_alterar_codigo(struct item p_1[], int *p_2) {
       while (true) {
         int selecionado_2;
 
+        system("clear");
         cout << "Código " << p_1[selecionado - 1].codigo << " ("
              << p_1[selecionado - 1].nome
-             << ") será alterado para (ou 0 para cancelar): ";
+             << ") será alterado para \n(ou 0 para cancelar): ";
 
         if (!(cin >> selecionado_2) || selecionado_2 < 0 ||
             selecionado_2 > *p_2) {
-          cout << endl;
+          system("clear");
           cout << "Código inválido!" << endl;
-          cout << endl;
           sleep(delay);
           cin.clear();
           cin.ignore(tudo);
@@ -341,9 +319,10 @@ void modoADM_alterar_codigo(struct item p_1[], int *p_2) {
 void modoADM_excluir(struct item p_1[], int *p_2) {
   while (true) {
     int selecionado;
-
+    system("clear");
     cout << "----EXCLUIR PRODUTO-----" << endl;
     exibir(p_1, *p_2, 2);
+    cout << endl;
     cout << "Insira o código do produto (ou 0 para cancelar): ";
     if (!(cin >> selecionado) || selecionado < 0 || selecionado > *p_2) {
       system("clear");
@@ -463,7 +442,7 @@ void modoADM_alterar(struct item p_1[], int *p_2) {
         modoADM_alterar_codigo(p_1, p_2);
         pausa();
         system("clear");
-        break;
+        return;
       default:
         return;
       }
@@ -556,22 +535,20 @@ void modoADM(struct item p_1[], int *p_2, float p_3, int *p_4) {
       case 1:
         // Verifica se há espaço dentro do array de produtos para inserir um
         // novo produto
+        system("clear");
         if (*p_2 < qtdMaxDeProdutos) {
-          system("clear");
           modoADM_cadastrar(p_1, p_2);
-          pausa();
-          system("clear");
         } else {
-          cout << endl;
-          cout << "A capacidade máxima de produtos cadastrados\nfoi atingida. "
-                  "Para modoADM_cadastrar novos produtos\nremova algum já "
+          cout << "A capacidade máxima de produtos cadastrados\nfoi atingida! "
+                  "Para cadastrar novos produtos,\nexclua algum "
                   "existem para "
-                  "liberar espaço!"
+                  "liberar espaço"
                << endl;
-          cout << endl;
           cin.clear();
           cin.ignore(tudo);
         }
+        pausa();
+        system("clear");
         break;
       case 2:
         system("clear");
