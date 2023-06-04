@@ -316,6 +316,8 @@ void modoADM_alterar_codigo(struct item p_1[], int *p_2) {
 
             // Apaga o espaço extra criado
             (*p_2)--;
+
+            system("clear");
             cout << "Alteração realizada com sucesso!" << endl;
             return;
           }
@@ -407,8 +409,7 @@ void modoADM_cadastrar(struct item p_1[], int *p_2) {
   system("clear");
   p_1[*p_2].codigo = *p_2 + 1;
 
-  cout << "\n"
-       << p_1[*p_2].quantidade << "un de " << p_1[*p_2].nome << " à R$"
+  cout << p_1[*p_2].quantidade << "un de " << p_1[*p_2].nome << " à R$"
        << p_1[*p_2].preco
        << " foram cadastradas\ncom sucesso sob o código: " << p_1[*p_2].codigo
        << endl;
@@ -609,7 +610,7 @@ void comprar(struct item p_1[], int p_2, float *p_3) {
       system("clear");
       cout << "Obrigado pela compra!"
            << "\n\nTroco: R$" << (pagamento - p_1[p_2 - 1].preco) << endl;
-      *p_3 += pagamento - p_1[p_2 - 1].preco;
+      *p_3 += p_1[p_2 - 1].preco;
       p_1[p_2 - 1].quantidade--;
 
       pausa();
@@ -645,7 +646,6 @@ int main() {
     if (!(cin >> inserido) || inserido <= 0 ||
         (inserido > qtdProdutos && inserido != chaveDeAcesso)) {
       system("clear");
-      cout << endl;
       cout << "Código inválido!" << endl;
       sleep(delay);
       cin.clear();
