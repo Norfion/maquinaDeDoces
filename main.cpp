@@ -468,7 +468,9 @@ void modoADM_caixa(struct item p_1[], int p_2, float p_3) {
   for (int i = 0; i < p_2; i++) {
     somaPreco += p_1[i].preco * p_1[i].quantidade;
   }
-  cout << "Valor bruto: R$" << somaPreco << endl;
+  cout << "Total em produtos: R$" << somaPreco << endl;
+  cout << endl;
+  cout << "TOTAL: R$" << p_3 + somaPreco << endl;
 }
 void modoADM_trocarSenha(int *p_1) {
   while (true) {
@@ -653,7 +655,6 @@ int main() {
       system("clear");
     } else if (inserido == chaveDeAcesso) {
       system("clear");
-      cout << endl;
       cout << "Entrando no modo administrador..." << endl;
       sleep(delay);
       system("clear");
