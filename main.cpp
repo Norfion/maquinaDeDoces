@@ -1,3 +1,8 @@
+// Código criado por:
+// Normando Nascimento Oliveira Meira
+// RA: 2840482311028
+// Fatec-RP
+
 #include <iomanip>
 #include <iostream>
 #include <string>
