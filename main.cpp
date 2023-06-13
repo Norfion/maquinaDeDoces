@@ -276,7 +276,6 @@ void modoADM_alterar_codigo(struct item p_1[], int *p_2) {
       while (true) {
         int selecionado_2;
 
-        system("clear");
         cout << "Código " << p_1[selecionado - 1].codigo << " ("
              << p_1[selecionado - 1].nome
              << ") será alterado para \n(ou 0 para cancelar): ";
