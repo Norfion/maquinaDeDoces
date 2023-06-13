@@ -414,7 +414,6 @@ void modoADM_cadastrar(struct item p_1[], int *p_2) {
        << " foram cadastradas\ncom sucesso sob o código: " << p_1[*p_2].codigo
        << endl;
   (*p_2)++;
-  pausa();
 }
 void modoADM_alterar(struct item p_1[], int *p_2) {
   while (true) {
