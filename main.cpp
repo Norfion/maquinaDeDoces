@@ -196,7 +196,7 @@ void modoADM_alterar_preco(struct item p_1[], int p_2) {
         while (true) {
           system("clear");
           cout << p_1[selecionado - 1].nome << " R$"
-               << p_1[selecionado - 1].preco << " será alterado para: ";
+               << p_1[selecionado - 1].preco << " será alterado para: R$";
           if (!(cin >> p_1[selecionado - 1].preco) ||
               p_1[selecionado - 1].preco <= 0) {
             system("clear");
@@ -276,6 +276,7 @@ void modoADM_alterar_codigo(struct item p_1[], int *p_2) {
       while (true) {
         int selecionado_2;
 
+        system("clear");
         cout << "Código " << p_1[selecionado - 1].codigo << " ("
              << p_1[selecionado - 1].nome
              << ") será alterado para \n(ou 0 para cancelar): ";
@@ -413,6 +414,7 @@ void modoADM_cadastrar(struct item p_1[], int *p_2) {
        << " foram cadastradas\ncom sucesso sob o código: " << p_1[*p_2].codigo
        << endl;
   (*p_2)++;
+  pausa();
 }
 void modoADM_alterar(struct item p_1[], int *p_2) {
   while (true) {
